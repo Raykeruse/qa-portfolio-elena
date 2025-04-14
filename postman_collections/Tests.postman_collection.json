@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "3ad79207-e1eb-4105-8e94-5f25008b7614",
+		"name": "Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34794386"
+	},
+	"item": [
+		{
+			"name": "Статус код",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Проверка на статус-код 200 + статус сообщения OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"// pm.test(\"Проверка нескольких статус-кодов\", function () {",
+							"//     pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+							"// });",
+							"",
+							"// pm.test(\"Проверка на Статус сообщения - OK\", function () {",
+							"//     pm.response.to.have.status(\"OK\");",
+							"// });",
+							"",
+							"pm.test(\"Проверка на Статус-код - 100-й\", function () {",
+							"    pm.response.to.be.info;",
+							"});",
+							"",
+							"pm.test(\"Проверка на Статус-код - 200-й\", function () {",
+							"    pm.response.to.be.success;",
+							"});",
+							"",
+							"pm.test(\"Проверка на Статус-код - 300-й\", function () {",
+							"    pm.response.to.be.redirection;",
+							"});",
+							"",
+							"pm.test(\"Проверка на Статус-код - 400-й и 500-й\", function () {",
+							"    pm.response.to.be.error;",
+							"});",
+							"",
+							"pm.test(\"Проверка на Статус-код - 400-й\", function () {",
+							"    pm.response.to.be.error;",
+							"});",
+							"",
+							"pm.test(\"Проверка на Статус-код - 500-й\", function () {",
+							"    pm.response.to.be.serverError;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/random?category=animal",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"random"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "animal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Статус код Негативный",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Проверка на статус-код 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"// pm.test(\"Проверка на статус-код 400\", function () {",
+							"//     pm.response.to.have.status(400);",
+							"// });"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/random?category=anima",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"random"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "anima"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Data type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 10,\n    \"petId\": 123,\n    \"quantity\": 10,\n    \"shipDate\": \"2023-07-10T17:34:02.982Z\",\n    \"status\": \"approved\",\n    \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверка полей со строчным типом данных",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Global test\", function () {",
+							"    pm.expect(jsonData.location).to.eql({",
+							"        \"latitude\": \"-38.383494\",",
+							"        \"longitude\": \"33.427362\"",
+							"    })",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 1\", function () {",
+							"    pm.expect(jsonData.location).to.eql({",
+							"        \"latitude\": \"-38.383494\",",
+							"        \"longitude\": \"33.427362\"",
+							"    })",
+							"    pm.expect(jsonData.accuracy).to.eql(\"50\")",
+							"    pm.expect(jsonData.name).to.eql(\"Frontline house\")",
+							"    pm.expect(jsonData.phone_number).to.eql(\"(+91) 983 893 3937\")",
+							"    pm.expect(jsonData.address).to.eql(\"29, side layout, cohen 09\")",
+							"    pm.expect(jsonData.types).to.eql(\"shoe park,shop\")",
+							"    pm.expect(jsonData.website).to.eql(\"http://google.com\")",
+							"    pm.expect(jsonData.language).to.eql(\"French-IN\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 2\", function () {",
+							"    pm.expect(jsonData.accuracy).to.eql(\"50\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 3\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"Frontline house\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 4\", function () {",
+							"    pm.expect(jsonData.phone_number).to.eql(\"(+91) 983 893 3937\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 5\", function () {",
+							"    pm.expect(jsonData.address).to.eql(\"29, side layout, cohen 09\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 6\", function () {",
+							"    pm.expect(jsonData.types).to.eql(\"shoe park,shop\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 7\", function () {",
+							"    pm.expect(jsonData.website).to.eql(\"http://google.com\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое полей 8\", function () {",
+							"    pm.expect(jsonData.language).to.eql(\"French-IN\")",
+							"});",
+							"",
+							"",
+							"pm.test(\"Проверка на частичное содержимое поля\", function () {",
+							"    pm.expect(jsonData.name).to.include(\"USA\")",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id=65543d20c0ccd1a519dd907d500b61d3",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						},
+						{
+							"key": "place_id",
+							"value": "65543d20c0ccd1a519dd907d500b61d3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try/petstore",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"'Hello World'\");",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 10,\n    \"petId\": 123,\n    \"quantity\": 10,\n    \"shipDate\": \"2023-07-10T17:34:02.982Z\",\n    \"status\": \"approved\",\n    \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Not",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Проверка на содержимое поля\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).not.eql(\"approve\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на содержимое поля Boolean\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status == 'closed').to.be.false;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 10,\n    \"petId\": 123,\n    \"quantity\": 10,\n    \"shipDate\": \"2023-07-10T17:34:02.982Z\",\n    \"status\": \"approved\",\n    \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Знаки равенства",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Проверка на ==\", function () {",
+							"    pm.expect(jsonData.accuracy === 50).to.be.true;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id=65543d20c0ccd1a519dd907d500b61d3",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						},
+						{
+							"key": "place_id",
+							"value": "65543d20c0ccd1a519dd907d500b61d3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Проверка на то, что поле пустое\", function () {",
+							"    pm.expect(jsonData.accuracy).eql(null);",
+							"});",
+							"",
+							"pm.test(\"Проверка на то, что поле не пустое\", function () {",
+							"    pm.expect(jsonData.accuracy).not.eql(null);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id=65543d20c0ccd1a519dd907d500b61d3",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						},
+						{
+							"key": "place_id",
+							"value": "65543d20c0ccd1a519dd907d500b61d3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверка на частичное совпадение строки",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Проверка на частичное содержимое поля\", function () {",
+							"    pm.expect(jsonData.value).to.include(\"Chuck\")",
+							"});",
+							"",
+							"pm.test(\"Проверка на частичное содержимое поля -string\", function () {",
+							"    pm.expect(jsonData.value).to.have.string(\"Chuck\")",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.chucknorris.io/jokes/random?category=animal",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chucknorris",
+						"io"
+					],
+					"path": [
+						"jokes",
+						"random"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "animal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Basic data tests- numbers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Проверка на содержимое поля\", function () {",
+							"    pm.expect(jsonData.quantity).to.eql(10)",
+							"    });",
+							"",
+							"pm.test(\"Проверка на содержимое поля NOT\", function () {",
+							"    pm.expect(jsonData.quantity).not.eql(1)",
+							"    });",
+							"pm.test(\"Проверка на то, что поле пустое\", function () {",
+							"    pm.expect(jsonData.quantity).eql(null);",
+							"});",
+							"",
+							"pm.test(\"Проверка на то, что поле не пустое\", function () {",
+							"    pm.expect(jsonData.quantity).not.eql(null);",
+							"});",
+							"",
+							"pm.test(\"Проверка на ==\", function () {",
+							"    pm.expect(jsonData.quantity === '10').to.be.false;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 10,\n    \"petId\": 123,\n    \"quantity\": 10,\n    \"shipDate\": \"2023-07-10T17:34:02.982Z\",\n    \"status\": \"approved\",\n    \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "numbers check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Проверка на содержимое +-\", function () {",
+							"    pm.expect(jsonData.quantity).to.be.closeTo(10, 1)",
+							"    });",
+							"",
+							"//10 отправная точка ",
+							"//1 диапозон  ",
+							"",
+							"pm.test(\"Проверка на содержимое поля <\", function () {",
+							"    pm.expect(jsonData.quantity).to.be.below(12)",
+							"    });",
+							"",
+							" pm.test(\"Проверка на содержимое поля >\", function () {",
+							"    pm.expect(jsonData.quantity).be.above(9)",
+							"    });",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 10,\n    \"petId\": 123,\n    \"quantity\": 10,\n    \"shipDate\": \"2023-07-10T17:34:02.982Z\",\n    \"status\": \"approved\",\n    \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
