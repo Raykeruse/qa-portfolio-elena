@@ -15,3 +15,9 @@ This folder contains my first working automated test using Selenium and Pytest.
 
 ## 🎯 Goal:
 To practice writing and running a basic UI test and get comfortable with test structure.
+
+---
+
+## ➕ Additional test:
+### `test_google_logo.py`
+Verifies that the Google logo is visible on the page using XPath selector.
