@@ -1,0 +1,36 @@
+# QA Portfolio – Elena Raykerus
+
+👋 Hi! I'm a QA Engineer based in Helsinki, actively growing my skills in manual, UI, API, and automation testing.
+This portfolio includes real test cases, bug reports, API testing collections, and Selenium-based automation scripts.
+
+---
+
+## 📂 Project Structure
+
+tests/ ├── test_ui/ │ ├── positive/ │ │ └── test_login_positive.py │ ├── negative/ │ │ └── test_login_negative.py │
+└── test_google_logo.py
+
+
+---
+
+## ✅ Test Types
+
+- **Manual UI testing**: test case creation, element checks, exploratory flows
+- **Negative testing**: incorrect login credentials, empty fields, validations
+- **Automation**: Selenium + Pytest (Chrome driver)
+- **API testing**: Postman collections (see folder or repo)
+
+---
+
+## 🚀 Technologies
+
+- Python, Pytest, Selenium
+- Postman, Charles Proxy, Qase.io
+- Git, GitHub, VS Code, PyCharm
+
+---
+
+## 📎 Links
+
+- [My LinkedIn](https://www.linkedin.com/in/elenaraykerus)
+- [My Portfolio Board](https://github.com/Raykeruse/qa-portfolio-elena)
