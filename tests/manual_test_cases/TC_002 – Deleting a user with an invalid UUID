@@ -1,0 +1,29 @@
+**Description:**  
+Verify that the system correctly handles a deletion attempt with an invalid or non-existent user UUID.
+
+**Priority:** Medium  
+**Test Type:** Negative, Functional  
+**Test Level:** System  
+**Test Phase:** System Testing  
+
+## Preconditions:
+- Authorization token is valid.
+- The environment is set up via POST `/setup`.
+
+## Test Data:
+- Base URL: `https://dev-gs.qa-playground.com/api/v1`
+- Invalid UUID: `1234-invalid-uuid`
+
+## Steps:
+1. Send a DELETE request to `/users/1234-invalid-uuid`.
+2. Observe the response code and message.
+
+## Expected Result:
+- Response should be 404 or 400.
+- Error message should clearly explain that user was not found.
+- No user should be removed from the database.
+
+**Environment:** macOS 15.3.1, Chrome 135  
+**Automation Status:** Not Automated  
+**Tags:** API, Negative, Smoke  
+**Created:** 2025-05-03
