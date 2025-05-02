@@ -1,0 +1,50 @@
+# TC_001 – Deleting a user from the user list
+
+**Description:**  
+Test a feature that allows administrators to delete existing users via the API.
+
+**Priority:** High  
+**Test Type:** Functional  
+**Test Level:** System  
+**Test Phase:** System Testing  
+
+## Preconditions:
+- User is authorized in the system using a valid Bearer token.
+- Base URL: `https://dev-gs.qa-playground.com/api/v1`
+- The environment is set up by sending a POST request to `/setup`.
+- If a 401 response is returned, refresh the token and retry.
+
+## Test Data:
+- Authorization Header:
+
+
+## Steps:
+
+1. **Send a GET request** to `/users` to retrieve the list of current users.  
+ **Expected Result:** A list of users is returned.
+
+2. **Select any user** from the list and copy their `uuid`.  
+ **Expected Result:** UUID of the selected user is retrieved.
+
+3. **Send a DELETE request** to `/users/{uuid}` using the copied UUID.  
+ **Expected Result:** The request is successfully sent with no errors.
+
+4. **Verify that the response** has status code `204 No Content`.  
+ **Expected Result:** Response status code is `204`.
+
+5. **Send a GET request** again to `/users`.  
+ **Expected Result:** The deleted user is no longer listed.
+
+6. **Send a GET request** to `/users/{uuid}`.  
+ **Expected Result:** The response returns `404 Not Found` or another appropriate error indicating the user does not exist.
+
+## Environment:
+- OS: macOS 15.3.1 (24D70)
+- Browser: Chrome 135.0.7049.115 (x86_64)
+
+**Automation Status:** Not Automated  
+**Created By:** QA Engineer  
+**Date:** 2025-05-02  
+**Tags:** Smoke, API  
+**Requirement ID:** REQ_001  
+**User Story:** [API-1 on QA Playground](https://qa-playground.com/en/profile/backlog/manual?taskId=API-1)
