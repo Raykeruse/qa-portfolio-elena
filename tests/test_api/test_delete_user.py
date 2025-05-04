@@ -11,8 +11,8 @@ def test_delete_user():
     response = requests.get(f"{BASE_URL}/users", headers=HEADERS)
     assert response.status_code == 200
 
-    users = response.json()
-    print("RESPONSE JSON:", users)
+    response_json = response.json()
+    print("RESPONSE JSON:", response_json)
 
     users = response_json["users"]
     assert isinstance(users, list), "Expected list of users"
