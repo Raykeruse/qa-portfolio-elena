@@ -13,9 +13,10 @@ def test_delete_user():
 
     users = response.json()
     print("RESPONSE JSON:", users)
-    print("TYPE:", type(users))
 
-    assert isinstance(users, list), f"Expected a list, got: {type(users)}"
+    users = response_json["users"]
+    assert isinstance(users, list), "Expected list of users"
+    assert users, "User list is empty"
 
     user_id = users[0]["uuid"]
 
