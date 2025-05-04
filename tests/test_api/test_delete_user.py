@@ -10,8 +10,12 @@ def test_delete_user():
 
     response = requests.get(f"{BASE_URL}/users", headers=HEADERS)
     assert response.status_code == 200
+
     users = response.json()
-    assert users, "User list is empty"
+    print("RESPONSE JSON:", users)
+    print("TYPE:", type(users))
+
+    assert isinstance(users, list), f"Expected a list, got: {type(users)}"
 
     user_id = users[0]["uuid"]
 
