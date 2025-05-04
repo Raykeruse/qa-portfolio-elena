@@ -23,3 +23,5 @@ def test_delete_user():
         print("❗ Known issue: 500 error on valid DELETE request.")
     else:
         assert delete_response.status_code == 204
+
+# temp change to trigger CI
